@@ -12,6 +12,90 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Digi Shop',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Online Shopping App',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
+                  selected: controller.selectedIndex.value == 0,
+                  onTap: () {
+                    controller.changeTabIndex(0);
+                    Get.back();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.category),
+                  title: Text('Categories'),
+                  selected: controller.selectedIndex.value == 1,
+                  onTap: () {
+                    controller.changeTabIndex(1);
+                    Get.back();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.shopping_cart),
+                  title: Text('Cart'),
+                  selected: controller.selectedIndex.value == 2,
+                  onTap: () {
+                    controller.changeTabIndex(2);
+                    Get.back();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text('Profile'),
+                  selected: controller.selectedIndex.value == 3,
+                  onTap: () {
+                    controller.changeTabIndex(3);
+                    Get.back();
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
+                  onTap: () {
+                    Get.back();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.help),
+                  title: Text('Help & Support'),
+                  onTap: () {
+                    Get.back();
+                  },
+                ),
+              ],
+            ),
+          ),
           appBar: AppBar(
             title: const Text('Digi Shop'),
             centerTitle: true,
