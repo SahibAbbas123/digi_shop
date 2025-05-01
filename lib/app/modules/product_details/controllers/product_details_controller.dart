@@ -1,23 +1,29 @@
 import 'package:get/get.dart';
 
 class ProductDetailsController extends GetxController {
-  //TODO: Implement ProductDetailsController
+  final quantity = 1.obs;
+  final isFavorite = false.obs;
 
-  final count = 0.obs;
+  final productData = {}.obs;
+
   @override
   void onInit() {
     super.onInit();
+    // Get product data passed from arguments
+    productData.value = Get.arguments ?? {};
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void incrementQuantity() {
+    quantity.value++;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void decrementQuantity() {
+    if (quantity.value > 1) {
+      quantity.value--;
+    }
   }
 
-  void increment() => count.value++;
+  void toggleFavorite() {
+    isFavorite.value = !isFavorite.value;
+  }
 }
