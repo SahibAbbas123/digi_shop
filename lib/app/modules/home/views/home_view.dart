@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 import 'package:digi_shop/app/routes/app_pages.dart';
-import 'package:digi_shop/app/routes/app_pages.dart';
+
+
 // import '../routes/app_routes.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -102,6 +103,26 @@ class HomeView extends GetView<HomeController> {
           appBar: AppBar(
             title: const Text('Digi Shop'),
             centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: GestureDetector(
+                  onTap: () {
+                    // Handle avatar tap - perhaps navigate to profile
+                    controller.changeTabIndex(3);
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.grey,
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    // If you want to use an image instead:
+                    // backgroundImage: AssetImage('assets/images/profile.jpg'),
+                  ),
+                ),
+              ),
+            ],
           ),
           body: controller.selectedIndex.value == 0
               ? SingleChildScrollView(
@@ -111,11 +132,11 @@ class HomeView extends GetView<HomeController> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text('Categories',
+                        children: [
+                          const Text('Categories',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text('View All',
+                          const Text('View All',
                               style: TextStyle(color: Colors.blue)),
                         ],
                       ),
@@ -136,12 +157,14 @@ class HomeView extends GetView<HomeController> {
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text('All Products',
+                        children: [
+                          const Text('All Products',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text('View All',
-                              style: TextStyle(color: Colors.blue)),
+                          TextButton(
+                            onPressed: () => Get.toNamed(Routes.ALL_PRODUCTS),
+                            child: const Text('View All'),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 10),
