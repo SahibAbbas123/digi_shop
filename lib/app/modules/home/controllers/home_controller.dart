@@ -7,15 +7,30 @@ class HomeController extends GetxController {
     selectedIndex.value = index;
   }
 
-  // Static dummy categories
-  final categories = ['Electronics', 'Jewelery', "Men's Clothing", "Women's Clothing"];
+  final categories = [
+    'Electronics',
+    'Jewelery',
+    "Men's Clothing",
+    "Women's Clothing"
+  ];
 
-  // Static dummy products
-  final products = List.generate(
-    10,
-    (index) => {
+  final productImages = [
+    'assets/images/electronics.png',
+    'assets/images/jewelery.png',
+    'assets/images/mens_clothing.png',
+    'assets/images/womens_clothing.png',
+  ];
+
+  final products = List.generate(10, (index) {
+    return {
       'title': 'Product $index',
       'price': '\$${(20 + index * 5)}',
-    },
-  );
+      'image': [
+        'assets/images/electronics.png',
+        'assets/images/jewelery.png',
+        'assets/images/mens_clothing.png',
+        'assets/images/womens_clothing.png',
+      ][index % 4],
+    };
+  });
 }

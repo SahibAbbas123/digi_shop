@@ -22,23 +22,41 @@ class HomeView extends GetView<HomeController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Categories', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Categories',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text('View All',
+                              style: TextStyle(color: Colors.blue)),
+                        ],
+                      ),
                       const SizedBox(height: 10),
                       SizedBox(
                         height: 50,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.categories.length,
-                          separatorBuilder: (_, __) => const SizedBox(width: 10),
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(width: 10),
                           itemBuilder: (context, index) {
                             return Chip(
-                              label: Text(controller.categories[index]),
-                            );
+                                label: Text(controller.categories[index]));
                           },
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text('All Products', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('All Products',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text('View All',
+                              style: TextStyle(color: Colors.blue)),
+                        ],
+                      ),
                       const SizedBox(height: 10),
                       ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
@@ -50,6 +68,12 @@ class HomeView extends GetView<HomeController> {
                           return Card(
                             elevation: 2,
                             child: ListTile(
+                              leading: Image.asset(
+                                product['image']!,
+                                width: 50,
+                                height: 50,
+                                fit: BoxFit.cover,
+                              ),
                               title: Text(product['title']!),
                               subtitle: Text(product['price']!),
                               trailing: const Icon(Icons.arrow_forward_ios),
@@ -66,7 +90,8 @@ class HomeView extends GetView<HomeController> {
             onTap: controller.changeTabIndex,
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifications'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications), label: 'Notifications'),
             ],
           ),
         ));
