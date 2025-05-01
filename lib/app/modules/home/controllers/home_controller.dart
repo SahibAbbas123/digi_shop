@@ -4,7 +4,9 @@ class HomeController extends GetxController {
   var selectedIndex = 0.obs;
 
   void changeTabIndex(int index) {
-    selectedIndex.value = index;
+    if (index >= 0 && index < 3) { // 3 is the number of bottom nav items
+      selectedIndex.value = index;
+    }
   }
 
   final categories = [

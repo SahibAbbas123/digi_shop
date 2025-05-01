@@ -4,10 +4,10 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
+  static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const LOGIN = _Paths.LOGIN;
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
-  static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
   static const ALL_PRODUCTS = _Paths.ALL_PRODUCTS;
   static const CART = _Paths.CART;
 }

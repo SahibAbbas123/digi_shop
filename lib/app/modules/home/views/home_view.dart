@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
-import 'package:digi_shop/app/routes/app_pages.dart'; // Replace 'your_project_name' with your actual project name
-
+import 'package:digi_shop/app/routes/app_pages.dart';
+import 'package:digi_shop/app/routes/app_pages.dart';
+// import '../routes/app_routes.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   static const noNotifications = Center(
     child: Text('No Notifications', style: TextStyle(fontSize: 20)),
@@ -67,8 +68,8 @@ class HomeView extends GetView<HomeController> {
                   title: Text('Cart'),
                   selected: controller.selectedIndex.value == 2,
                   onTap: () {
-                    controller.changeTabIndex(2);
-                    Get.back();
+                    Get.toNamed(Routes.CART);
+                    Get.back(); // Close drawer
                   },
                 ),
                 ListTile(
@@ -189,8 +190,7 @@ class HomeView extends GetView<HomeController> {
                                 children: [
                                   Expanded(
                                     child: ClipRRect(
-                                      borderRadius:
-                                          const BorderRadius.vertical(
+                                      borderRadius: const BorderRadius.vertical(
                                         top: Radius.circular(15),
                                       ),
                                       child: Image.asset(
@@ -267,15 +267,30 @@ class HomeView extends GetView<HomeController> {
                   ),
                 )
               : noNotifications,
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: controller.selectedIndex.value,
-            onTap: controller.changeTabIndex,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.notifications), label: 'Notifications'),
-            ],
-          ),
+          bottomNavigationBar: Obx(() => BottomNavigationBar(
+                currentIndex: controller.selectedIndex.value,
+                onTap: (index) {
+                  if (index == 2) {
+                    Get.toNamed(Routes.CART);
+                  } else {
+                    controller.changeTabIndex(index);
+                  }
+                },
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.category),
+                    label: 'Categories',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.shopping_cart),
+                    label: 'Cart',
+                  ),
+                ],
+              )),
         ));
   }
 }
