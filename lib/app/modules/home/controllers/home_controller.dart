@@ -6,29 +6,16 @@ class HomeController extends GetxController {
   void changeTabIndex(int index) {
     selectedIndex.value = index;
   }
+
+  // Static dummy categories
+  final categories = ['Electronics', 'Jewelery', "Men's Clothing", "Women's Clothing"];
+
+  // Static dummy products
+  final products = List.generate(
+    10,
+    (index) => {
+      'title': 'Product $index',
+      'price': '\$${(20 + index * 5)}',
+    },
+  );
 }
-
-
-// import 'package:get/get.dart';
-
-// class HomeController extends GetxController {
-//   //TODO: Implement HomeController
-
-//   final count = 0.obs;
-//   @override
-//   void onInit() {
-//     super.onInit();
-//   }
-
-//   @override
-//   void onReady() {
-//     super.onReady();
-//   }
-
-//   @override
-//   void onClose() {
-//     super.onClose();
-//   }
-
-//   void increment() => count.value++;
-// }
