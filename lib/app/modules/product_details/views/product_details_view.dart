@@ -4,6 +4,7 @@ import '../controllers/product_details_controller.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +29,8 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
               height: 300,
               width: double.infinity,
               color: Colors.grey[100],
-              child: Image.asset(
-                controller.productData['image'] ?? 'assets/images/green_nike_air_shoes.jpg',
+              child: Image.network(
+                controller.productData['image'] ?? '', // Display the image
                 fit: BoxFit.contain,
               ),
             ),
@@ -71,7 +72,8 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                           color: Colors.yellow,
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Text('${controller.productData['discount']?.toString() ?? '20'}%'),
+                        child: Text(
+                            '${controller.productData['discount']?.toString() ?? '20'}%'),
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -111,9 +113,13 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         ),
                       ),
                       Text(
-                        controller.productData['isInStock'] == true ? 'In Stock' : 'Out of Stock',
+                        controller.productData['isInStock'] == true
+                            ? 'In Stock'
+                            : 'Out of Stock',
                         style: TextStyle(
-                          color: controller.productData['isInStock'] == true ? Colors.green : Colors.red,
+                          color: controller.productData['isInStock'] == true
+                              ? Colors.green
+                              : Colors.red,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -129,8 +135,8 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    controller.productData['description'] ?? 
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+                    controller.productData['description'] ??
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
                     style: const TextStyle(
                       color: Colors.grey,
                       height: 1.5,

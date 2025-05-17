@@ -1,35 +1,36 @@
+import 'dart:convert';
+import 'package:digi_shop/app/data/Models/product_model.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 class AllProductsController extends GetxController {
-  final count = 0.obs;
-
-  final products = [
-    {
-      'id': 1,
-      'title': 'Green Nike Air Shoes',
-      'seller': 'Shoes & Snikers',
-      'price': 4000.0,
-      'rating': 4,
-      'image': 'assets/images/green_nike_air_shoes.jpg',
-      'isVerified': true,
-    },
-    // Add more products with incremental IDs
-  ].obs;
+  var isLoading = true.obs;
+  var productList = <ProductModel>[].obs;
+  final allProductsUrl = "https://fakestoreapi.com/products";
 
   @override
   void onInit() {
     super.onInit();
+    fetchProducts();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void fetchProducts() async {
+    try {
+      isLoading.value = true;
+      final response = await http.get(Uri.parse(allProductsUrl));
 
-  @override
-  void onClose() {
-    super.onClose();
+      if (response.statusCode == 200) {
+        List<dynamic> productsJson = json.decode(response.body);
+        productList.value = productsJson
+            .map((product) => ProductModel.fromJson(product))
+            .toList();
+      } else {
+        Get.snackbar("Error", "Failed to fetch products");
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading.value = false;
+    }
   }
-
-  void increment() => count.value++;
 }
